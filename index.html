@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        function Eliminar(){
+            //document.getElementById("peliminar").remove();
+
+            var padre=document.getElementById("peliminar");
+            var hijoRojo=document.getElementById("rojo");
+            
+            padre.removeChild(hijoRojo);
+        }
+
+        function AgregarFila(){
+            var txt_Nombre=document.getElementById("txtNombre").value;
+            var txt_Email=document.getElementById("txtEmail").value;
+            var txt_Telefono=document.getElementById("txtTelefono").value;
+            var txt_Direccion=document.getElementById("txtDireccion").value;
+
+           /* var rowNuevo=document.createElement("tr");
+            var columnaNueva1=document.createElement("td"); 
+            var columnaNueva2=document.createElement("td");
+            var columnaNueva3=document.createElement("td");
+            var columnaNueva4=document.createElement("td");
+
+            var txtNombre=document.createTextNode(txt_Nombre);
+            columnaNueva1.appendChild(txtNombre);
+            rowNuevo.appendChild(columnaNueva1);
+
+            var txtEmail=document.createTextNode(txt_Email);
+            columnaNueva2.appendChild(txtEmail);
+            rowNuevo.appendChild(columnaNueva2);
+
+            var txtTelefono=document.createTextNode(txt_Telefono);
+            columnaNueva3.appendChild(txtTelefono);
+            rowNuevo.appendChild(columnaNueva3);
+
+            var txtDireccion=document.createTextNode(txt_Direccion);
+            columnaNueva4.appendChild(txtDireccion);
+            rowNuevo.appendChild(columnaNueva4);
+
+            document.getElementById("cuerpoDeTabla").appendChild(rowNuevo);
+            */
+
+            document.getElementById("MiTabla").insertRow(-1).innerHTML='<td>'+ txt_Nombre+'</td><td>'+txt_Email+'</td><td>'+txt_Telefono+'</td><td>'+txt_Direccion+'</td>'+'<td> <button class="btn btn-danger" onclick="BorraFila(this);">Borrar</button></td>';
+        }
+
+        function EliminarFila(){
+            var numFilas=document.getElementById("MiTabla").rows.length;
+
+            if(numFilas>1){
+                document.getElementById("MiTabla").deleteRow(numFilas-1);
+            }
+            
+        }
+
+        function EliminarTodo(){
+            var numero_filas=document.getElementById("MiTabla").rows.length;
+            
+            for(var i=0; i<numero_filas;i++ ){
+                if(numero_filas-1==i){
+                    document.getElementById("MiTabla").deleteRow(1);
+                }
+                document.getElementById("MiTabla").deleteRow(1);
+            }
+
+        }
+
+        function AutoEliminar(btn){
+            //document.getElementById("PadreEliminado").remove();
+            btn.parentNode.remove();
+            document.getElementById("PadreBotonAuto").removeChild(btn);
+        }
+
+        function BorraFila(btn){
+            //btn.parentNode.parentNode.remove();
+            var indice=btn.parentNode.parentNode.rowIndex;
+            document.getElementById("MiTabla").deleteRow(indice);
+            console.log(indice);
+        }
+            
+    </script>
+</head>
+<body>
+    
+    <h1 class="text-center text-info">Agenda Personal</h1>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">    
+            <div class="row marginB">
+                <label>Ingresa Nombres</label>
+                <input type="text" id="txtNombre" placeholder="ingresa tu nombre">
+            </div>
+
+            <div class="row marginB">
+                <label>Ingresa tu correo</label>
+                <input type="email" id="txtEmail" placeholder="ingresa tu email">
+            </div>
+
+            <div class="row marginB">
+                <label>Ingresa tu telefono</label>
+                <input type="number" id="txtTelefono" placeholder="ingresa tu telefono">
+            </div>
+
+            <div class="row marginB">
+                <label>Ingresa tu direccion</label>
+                <input type="text" id="txtDireccion" placeholder="ingresa tu direccion">
+            </div>
+
+            <div class="row marginB">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-primary" onclick="AgregarFila();">Agregar</button>
+                    <button class="btn btn-danger" onclick="EliminarTodo();">Eliminar</button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row" id="principal">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="Mytable" id="MiTabla">
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoDeTabla">
+                    <tr>
+                        <td>Yakelin Vargas Sotaya</td>
+                        <td>yakivs_05@gmail.com</td>
+                        <td>974365986</td>
+                        <td>Av. Arenales</td>
+                        <td><button class="btn btn-danger" onclick="BorraFila(this);">Borrar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2" id="ultimo"></div>
+    </div>
+
+    <!-- <div id="peliminar">
+        <p class="text-danger" id="rojo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium excepturi sapiente quos, est ratione quas voluptatem laborum quis ex numquam libero officiis recusandae. Sunt impedit esse tempore id nihil molestias.</p>
+        <p class="text-info" id="azul">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium excepturi sapiente quos, est ratione quas voluptatem laborum quis ex numquam libero officiis recusandae. Sunt impedit esse tempore id nihil molestias.</p>
+    </div>
+
+    <button class="btn btn-danger" onclick="Eliminar();">Eliminar</button>
+
+    <div id="PadreBotonAuto" style="margin-top: 50px;">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit tenetur suscipit enim optio laudantium sint sapiente autem consequuntur, excepturi assumenda illo et quidem, accusantium quibusdam consequatur magnam hic dolore. Dolores?</p>
+        <button class="btn btn-warning" onclick="AutoEliminar(this);">
+            AutoEliminar
+        </button>
+    </div> -->
+
+    <script>
+        var parrafoNuevo=document.createElement("p");
+        var textoNuevo=document.createTextNode("Hola mundo");
+
+        parrafoNuevo.appendChild(textoNuevo);
+
+        var principal=document.getElementById("principal");
+        var ultimo=document.getElementById("ultimo");
+
+        principal.insertBefore(parrafoNuevo, ultimo);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+.Mytable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.Mytable th{
+    border: solid;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    color: white;
+    background-color: rgb(65, 65, 235);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.Mytable td{
+    border: solid;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+tbody tr:hover {
+    background-color: aqua;
+}
+
+.marginB {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
